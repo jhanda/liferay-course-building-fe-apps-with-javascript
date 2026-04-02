@@ -1,0 +1,61 @@
+{
+   "fieldSets": [
+      {
+         "fields": [
+               {
+                  "name": "title",
+                  "label": "title",
+                  "description": "",
+                  "type": "text",
+                  "typeOptions": {
+                     "placeholder": "Chart Title"
+                  },
+                  "dataType": "string",
+                  "defaultValue": ""
+               },
+               {
+                  "name": "restContextPath",
+                  "label": "REST Context Path",
+                  "description": "",
+                  "type": "text",
+                  "typeOptions": {
+                     "placeholder": "eg. /o/c/myobjects"
+                  },
+                  "dataType": "string",
+                  "defaultValue": ""
+               },
+               {
+                  "name": "aggregationField",
+                  "label": "Aggregation Field",
+                  "description": "",
+                  "type": "text",
+                  "typeOptions": {
+                     "placeholder": "eg. tier.key"
+                  },
+                  "dataType": "string",
+                  "defaultValue": ""
+               },
+               {
+                  "name": "datasetLabel",
+                  "label": "Dataset label",
+                  "description": "",
+                  "type": "text",
+                  "typeOptions": {
+                     "placeholder": "eg. Count by tier"
+                  },
+                  "dataType": "string",
+                  "defaultValue": ""
+               },	
+					     {
+                  "name": "chartColor",
+                  "label": "Chart color",
+                  "type": "colorPalette",
+                  "dataType": "object",
+                  "defaultValue": {
+                     "color": "black"
+                  }
+               }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,8 @@
+assemble:
+    - from: build/vite
+      into: static
+clarity-map-with-slots-import-map:
+    name: Clarity Map With Slots Import Map
+    type: jsImportMapsEntry
+    bareSpecifier: clarity-custom-element-map-with-slots
+    url: assets/*.js    

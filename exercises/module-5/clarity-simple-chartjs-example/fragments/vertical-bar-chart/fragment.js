@@ -1,0 +1,1 @@
+import 'liferay-chartjs';
