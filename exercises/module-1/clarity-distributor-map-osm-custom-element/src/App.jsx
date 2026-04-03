@@ -7,7 +7,7 @@ function App(props) {
 	const promoStoreValue = props.promoStore;
 
 	return (
-		<>
+		<>		
 			<Map promoStore={promoStoreValue}/>
 		</>
 	)

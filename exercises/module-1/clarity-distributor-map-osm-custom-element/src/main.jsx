@@ -7,13 +7,13 @@ import "leaflet/dist/leaflet.css";
 class WebComponent extends HTMLElement {
 
 	connectedCallback() {
+
 		this.root = createRoot(this);
 
 		this.root.render(
 			<StrictMode>
 				<App promoStore={this.getAttribute('promoStore')}/>
-			</StrictMode>,
-			this
+			</StrictMode>
 		);
 	}
 
@@ -24,7 +24,7 @@ class WebComponent extends HTMLElement {
 	}
 }
 
-const ELEMENT_ID = 'clarity-custom-element-distributor-map';
+const ELEMENT_ID = 'clarity-distributor-map-custom-element';
 
 if (!customElements.get(ELEMENT_ID)) {
 	customElements.define(ELEMENT_ID, WebComponent);

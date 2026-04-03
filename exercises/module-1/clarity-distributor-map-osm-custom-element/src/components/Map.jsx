@@ -29,7 +29,6 @@ const blueDotIcon = new L.Icon({
 });
 
 const Map = ({ promoStore }) => {
-    const [locations, setLocations] = useState(null);
     const [center, setCenter] = useState([DALLAS.lat, DALLAS.lon]);
     const [hoveredMarker, setHoveredMarker] = useState(null);
 
@@ -70,8 +69,10 @@ const Map = ({ promoStore }) => {
                 <CalculateBounds items={locations} />
 
                 {locations.map((location) => {
-                    const lat = Number(location.latitude);
-                    const lon = Number(location.longitude);
+
+                    const lat = Number(location.position.lat);
+                    const lon = Number(location.position.lng);
+
                     if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
 
                     return (
