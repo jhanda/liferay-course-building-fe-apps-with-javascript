@@ -10,7 +10,7 @@
 		"@vitejs/plugin-react": "^4.2.1",
 		"vite": "^5.2.0"
 	},
-	"name": "clarity-distributor-map-custom-element",
+	"name": "clarity-distributor-map-custom-element-deprecated",
 	"private": true,
 	"scripts": {
 		"build": "vite build",

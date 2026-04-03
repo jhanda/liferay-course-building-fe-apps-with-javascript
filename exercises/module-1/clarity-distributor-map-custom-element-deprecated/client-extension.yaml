@@ -1,11 +1,11 @@
 assemble:
     - from: build/vite
       into: static
-clarity-distributor-map-custom-element:
+clarity-distributor-map-custom-element-deprecated:
     cssURLs:
         - assets/*.css
-    friendlyURLMapping: clarity-distributor-map-custom-element
-    htmlElementName: clarity-distributor-map-custom-element
+    friendlyURLMapping: clarity-distributor-map-custom-element-deprecated
+    htmlElementName: clarity-distributor-map-custom-element-deprecated
     instanceable: false
     name: Clarity Distributor Map
     portletCategoryName: category.client-extensions
