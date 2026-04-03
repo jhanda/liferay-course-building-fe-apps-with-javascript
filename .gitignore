@@ -1,5 +1,6 @@
 gradle-local.properties
 /bundles/
+/client-extensions/
 /client-extensions/*/build/
 /client-extensions/*/dist/
 /node_modules/
