@@ -4,11 +4,9 @@ import Map from "./components/Map.jsx";
 
 function App(props) {
 
-	const promoStoreValue = props.promoStore;
-
 	return (
 		<>		
-			<Map promoStore={promoStoreValue}/>
+			<Map />
 		</>
 	)
 }

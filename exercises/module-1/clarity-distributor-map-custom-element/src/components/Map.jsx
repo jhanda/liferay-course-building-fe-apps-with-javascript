@@ -16,34 +16,9 @@ const locations = [
     { id: 4, name: 'Roka', street: '5646 Milton St. Suite 540', city: 'Dallas', state: 'TX', zipCode: '75206', tier: {key: 'silver', name: 'Silver'}, position: {lat: 32.848092, lng: -96.770822} }
 ];
 
-const redDotIcon = new L.Icon({
-    iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-});
-
-const blueDotIcon = new L.Icon({
-    iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png",
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-});
-
-const Map = ({ promoStore }) => {
+const Map = ({}) => {
     const [center, setCenter] = useState([DALLAS.lat, DALLAS.lon]);
     const [hoveredMarker, setHoveredMarker] = useState(null);
-
-    useEffect(() => {
-        setCenter([
-            DALLAS.lat,
-            DALLAS.lon,
-        ]);
-    }, []);
-
-    const getIconForLocation = useMemo(() => {
-        return (location) => {
-            return location?.name === promoStore ? blueDotIcon : redDotIcon;
-        };
-    }, [promoStore]);
 
     const handleMarkerClick = (location) => {
 
@@ -79,7 +54,13 @@ const Map = ({ promoStore }) => {
                         <Marker
                             key={location.id}
                             position={[lat, lon]}
-                            icon={getIconForLocation(location)}
+                            icon={
+                                new L.Icon({
+                                    iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
+                                    iconSize: [32, 32],
+                                    iconAnchor: [16, 32],
+                                })
+                            }                            
                             eventHandlers={{
                                 mouseover: () => setHoveredMarker(location.id),
                                 mouseout: () => setHoveredMarker(null),

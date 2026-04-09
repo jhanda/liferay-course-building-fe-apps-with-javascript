@@ -12,7 +12,7 @@ class WebComponent extends HTMLElement {
 
 		this.root.render(
 			<StrictMode>
-				<App promoStore={this.getAttribute('promoStore')}/>
+				<App />
 			</StrictMode>
 		);
 	}

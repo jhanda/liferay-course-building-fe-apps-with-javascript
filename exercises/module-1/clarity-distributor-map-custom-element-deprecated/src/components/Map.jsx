@@ -17,7 +17,7 @@ const locations = [
 const center = locations[0].position;
 const apiKey = "API_KEY";
 
-const Map = () => {
+const Map = ({promoStore}) => {
     const [activeMarker, setActiveMarker] = useState(null);
     const [hoveredMarker, setHoveredMarker] = useState(null);
 
@@ -62,6 +62,17 @@ const Map = () => {
                             {hoveredMarker === location.id && (
                                 <InfoWindow
                                     position={location.position}
+                                    icon={
+                                        location?.name === promoStore ? new L.Icon({
+                                            iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/blue-dot.png",
+                                            iconSize: [32, 32],
+                                            iconAnchor: [16, 32],
+                                        }) : new L.Icon({
+                                            iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
+                                            iconSize: [32, 32],
+                                            iconAnchor: [16, 32],
+                                        })
+                                    }                                    
                                     onCloseClick={() => setActiveMarker(null)}
                                     options={{ pixelOffset: new window.google.maps.Size(0, -8) }} // optional
                                 >
