@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import React, { useEffect, useMemo, useState } from "react";
+import L from "leaflet";
+import { MapContainer, TileLayer, Marker, Tooltip } from "react-leaflet";
 
-const mapContainerStyle = {
-    width: '100%',
-    height: '400px'
-};
+import CalculateBounds from "./CalculateBounds";
+
+const DALLAS = {
+    lat: 32.848092,
+    lon: -96.770822
+}
 
 const locations = [
     { id: 1, name: 'Warby Parker', street: '11700 Domain Blvd Suite 114', city: 'Austin', state: 'TX', zipCode: '78758', tier: {key: 'gold', name: 'Gold'}, position: {lat: 30.402968, lng: -97.720991} },
@@ -13,69 +16,72 @@ const locations = [
     { id: 4, name: 'Roka', street: '5646 Milton St. Suite 540', city: 'Dallas', state: 'TX', zipCode: '75206', tier: {key: 'silver', name: 'Silver'}, position: {lat: 32.848092, lng: -96.770822} }
 ];
 
-// Center on the first location
-const center = locations[0].position;
-const apiKey = "API_KEY";
-
-const Map = () => {
-    const [activeMarker, setActiveMarker] = useState(null);
+const Map = ({}) => {
+    const [center, setCenter] = useState([DALLAS.lat, DALLAS.lon]);
     const [hoveredMarker, setHoveredMarker] = useState(null);
 
-    const handleMarkerClick = (markerId) => {
-        setActiveMarker(markerId);
-        
-        Liferay.fire('selectDistributor', locations.find(location => location.id === markerId));
+    const handleMarkerClick = (location) => {
+
+        if (typeof Liferay !== "undefined"?.fire) {
+            Liferay.fire("selectDistributor", location);
+        } else if (typeof window !== "undefined" && window.Liferay?.fire) {
+            window.Liferay.fire("selectDistributor", location);
+        } else if (typeof Liferay !== "undefined" && Liferay?.fire) {
+            Liferay.fire("selectDistributor", location);
+        }
     };
 
-    const handleMouseOver = (markerId) => {
-        setHoveredMarker(markerId);
-    };
-
-    const handleMouseOut = () => {
-        setHoveredMarker(null);
-    };
+    if (!locations) return null;
 
     return (
-        <div style={{ width: '100%', height: '100%' }}>
-            <LoadScript googleMapsApiKey={apiKey}>
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    center={center}
-                    zoom={4}
-                    options={{
-                        mapTypeControl: false,
-                        fullscreenControl: false,
-                        streetViewControl: false,
-                        zoomControl: true,
-                    }}
-                >
-                    {locations.map((location) => (
+        <div style={{ width: "100%", height: "500px" }}>
+            <MapContainer center={center} zoom={4} style={{ width: "100%", height: "100%" }}>
+                <TileLayer
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+
+                <CalculateBounds items={locations} />
+
+                {locations.map((location) => {
+
+                    const lat = Number(location.position.lat);
+                    const lon = Number(location.position.lng);
+
+                    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+
+                    return (
                         <Marker
                             key={location.id}
-                            position={location.position}
-                            title={location.name}
-                            onClick={() => handleMarkerClick(location.id)}
-                            onMouseOver={() => handleMouseOver(location.id)}
-                            onMouseOut={handleMouseOut}
+                            position={[lat, lon]}
+                            icon={
+                                new L.Icon({
+                                    iconUrl: "https://maps.gstatic.com/mapfiles/ms2/micons/red-dot.png",
+                                    iconSize: [32, 32],
+                                    iconAnchor: [16, 32],
+                                })
+                            }                            
+                            eventHandlers={{
+                                mouseover: () => setHoveredMarker(location.id),
+                                mouseout: () => setHoveredMarker(null),
+                                click: () => handleMarkerClick(location),
+                            }}
                         >
-                            {/* InfoWindow shown only on click */}
-                            {hoveredMarker === location.id && (
-                                <InfoWindow
-                                    position={location.position}
-                                    onCloseClick={() => setActiveMarker(null)}
-                                    options={{ pixelOffset: new window.google.maps.Size(0, -8) }} // optional
-                                >
-                                    <div style={{ maxWidth: 300 }}>
-                                        <div>{location.name}</div>
-                                        <div>{location.street}</div>
-                                        <div>{location.city}, {location.state}, {location.zipCode}</div>
+                        {hoveredMarker === location.id && (
+                            <Tooltip direction="top" offset={[0, -8]} opacity={1} permanent>
+                                <div style={{ width: 200, whiteSpace: "normal" }}>
+                                    <h5>{location.name}</h5>
+                                    <div>{location.street}</div>
+                                    <div>
+                                        {location.city}, {location.state}, {location.zipCode}
                                     </div>
-                                </InfoWindow>
-                            )}
+                                </div>
+                            </Tooltip>
+                        )}
                         </Marker>
-                    ))}
-                </GoogleMap>
-            </LoadScript>
+                    );
+                })}
+            </MapContainer>
         </div>
     );
 };

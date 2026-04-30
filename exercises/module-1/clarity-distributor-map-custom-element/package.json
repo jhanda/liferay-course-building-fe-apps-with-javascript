@@ -1,8 +1,9 @@
 {
 	"dependencies": {
-		"@react-google-maps/api": "^2.20.7",
+		"leaflet": "^1.9.4",		
 		"react": "18.2.0",
-		"react-dom": "18.2.0"
+		"react-dom": "18.2.0",
+		"react-leaflet": "^4.2.1"
 	},
 	"devDependencies": {
 		"@types/react": "^18.2.0",
@@ -10,7 +11,7 @@
 		"@vitejs/plugin-react": "^4.2.1",
 		"vite": "^5.2.0"
 	},
-	"name": "clarity-distributor-map-custom-element",
+	"name": "clarity-custom-element-distributor-map",
 	"private": true,
 	"scripts": {
 		"build": "vite build",
@@ -18,5 +19,5 @@
 		"preview": "vite preview"
 	},
 	"type": "module",
-	"version": "0.0.0"
+	"version": "0.0.1"
 }

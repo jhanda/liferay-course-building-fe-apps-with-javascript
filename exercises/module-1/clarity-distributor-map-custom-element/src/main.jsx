@@ -2,18 +2,18 @@ import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import App from './App.jsx'
-import './index.css'
+import "leaflet/dist/leaflet.css";
 
 class WebComponent extends HTMLElement {
 
 	connectedCallback() {
+
 		this.root = createRoot(this);
 
 		this.root.render(
 			<StrictMode>
 				<App />
-			</StrictMode>,
-			this
+			</StrictMode>
 		);
 	}
 

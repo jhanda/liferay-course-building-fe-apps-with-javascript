@@ -1,0 +1,8 @@
+assemble:
+    - from: build/vite
+      into: static
+liferay-js-import-maps-chartjs:
+    bareSpecifier: liferay-chartjs
+    name: Liferay Chart JS
+    type: jsImportMapsEntry
+    url: /index.js

@@ -1,6 +1,6 @@
 assemble:
     - from: build/vite
-      into: static
+      into: static 
 clarity-distributor-map-custom-element:
     cssURLs:
         - assets/*.css

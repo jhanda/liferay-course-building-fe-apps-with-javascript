@@ -1,0 +1,16 @@
+[#assign color="black" /]
+[#if configuration.chartColor??]
+	[#if configuration.chartColor.rgbValue??]
+		[#assign color=configuration.chartColor.rgbValue /]
+	[#elseif configuration.chartColor.color??]
+		[#assign color=configuration.chartColor.color /]
+  [/#if]
+[/#if]
+<liferay-chartjs 
+	title="${configuration.title}"
+	dataset-label="${configuration.datasetLabel}"
+	aggregation-field="${configuration.aggregationField}"
+	aggregation-type="count"
+	rest-context-path="${configuration.restContextPath}"
+	color="${color}"
+></liferay-chartjs>

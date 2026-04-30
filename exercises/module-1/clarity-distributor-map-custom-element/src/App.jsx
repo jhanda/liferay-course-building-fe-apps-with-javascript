@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import './App.css'
+import './App.css';
 import Map from "./components/Map.jsx";
 
-function App() {
-	const [count, setCount] = useState(0)
+function App(props) {
 
 	return (
-		<>
-			<Map/>
+		<>		
+			<Map />
 		</>
 	)
 }

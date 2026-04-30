@@ -2,6 +2,16 @@
     "private": true,
     "workspaces": {
         "packages": [
+            "client-extensions\\clarity-distributor-details-custom-element",
+            "client-extensions\\clarity-distributor-locator-library-js-import-maps",
+            "client-extensions\\clarity-distributor-map-custom-element",
+            "client-extensions\\clarity-distributor-table-custom-element",
+            "client-extensions\\clarity-map-with-shadow-dom",
+            "client-extensions\\clarity-simple-chartjs-example",
+            "client-extensions\\clarity-theme",
+            "exercises\\module-1\\clarity-distributor-map-custom-element-deprecated",
+            "exercises\\module-1\\liferay-sample-custom-element-5",
+            "exercises\\module-3\\liferay-sample-js-import-maps-entry"
         ]
     },
     "dependencies": {
